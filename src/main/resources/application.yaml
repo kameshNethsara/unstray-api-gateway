@@ -1,12 +1,8 @@
-server:
-  port: 8080
-
 spring:
   application:
     name: api-gateway
-
   config:
-    import: "optional:configserver:http://localhost:8888"
+    import: "configserver:http://localhost:8888"
 
 #  cloud:
 #    gateway:
@@ -21,27 +17,3 @@ spring:
 #          uri: lb://user-service
 #          predicates:
 #            - Path=/api/v1/users/**
-#
-#        - id: item-service
-#          uri: lb://item-service
-#          predicates:
-#            - Path=/api/v1/items/**
-#
-#        - id: media-service
-#          uri: lb://media-service
-#          predicates:
-#            - Path=/api/v1/media/**
-#
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka/
-#
-#  instance:
-#    prefer-ip-address: true
-#
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: health,info,gateway
