@@ -17,3 +17,6 @@ spring:
 #          uri: lb://user-service
 #          predicates:
 #            - Path=/api/v1/users/**
+
+  config:
+    import: "optional:configserver:http://10.160.0.3:8888"
