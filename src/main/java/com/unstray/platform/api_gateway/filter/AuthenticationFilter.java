@@ -1,12 +1,12 @@
 package com.unstray.platform.api_gateway.filter;
 
-import com.unstray.platform.api_gateway.util.JwtUtil;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+
+import com.unstray.platform.api_gateway.util.JwtUtil;
 
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
@@ -26,12 +26,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Override
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
-
-            // 1. Preflight OPTIONS requests සඳහා Auth Check නොකර Bypass කිරීම
-            if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS) {
-                return chain.filter(exchange);
-            }
-
             if (validator.isSecured.test(exchange.getRequest())) {
 
                 // Safely grab the first authorization header
