@@ -37,7 +37,7 @@ public class GatewayCorsFilter implements WebFilter {
 
         if (request.getMethod() == HttpMethod.OPTIONS) {
             response.setStatusCode(HttpStatus.OK);
-            return Mono.empty();
+            return response.setComplete();
         }
 
         return chain.filter(exchange);
